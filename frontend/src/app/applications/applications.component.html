@@ -1,0 +1,48 @@
+<div class="container mt-5">
+    <h2 class="mb-4">Job Applications</h2>
+  
+    <form (ngSubmit)="saveApplication()" class="mb-4">
+      <div class="row">
+        <div class="col-md-3">
+          <input type="text" [(ngModel)]="newApplication.company" name="company" class="form-control" placeholder="Company" required>
+        </div>
+        <div class="col-md-3">
+          <input type="text" [(ngModel)]="newApplication.position" name="position" class="form-control" placeholder="Position" required>
+        </div>
+        <div class="col-md-2">
+          <input type="text" [(ngModel)]="newApplication.status" name="status" class="form-control" placeholder="Status" required>
+        </div>
+        <div class="col-md-3">
+          <input type="date" [(ngModel)]="newApplication.appliedDate" name="appliedDate" class="form-control" required>
+        </div>
+        <div class="col-md-1">
+          <button type="submit" class="btn btn-success">{{ editing ? 'Update' : 'Add' }}</button>
+        </div>
+      </div>
+    </form>
+  
+    <table class="table table-bordered">
+      <thead class="thead-light">
+        <tr>
+          <th>Company</th>
+          <th>Position</th>
+          <th>Status</th>
+          <th>Applied Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let app of applications">
+          <td>{{ app.company }}</td>
+          <td>{{ app.position }}</td>
+          <td>{{ app.status }}</td>
+          <td>{{ app.appliedDate | date:'yyyy-MM-dd' }}</td>
+          <td>
+            <button class="btn btn-primary btn-sm" (click)="editApplication(app)">Edit</button>
+            <button class="btn btn-danger btn-sm" (click)="deleteApplication(app.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
